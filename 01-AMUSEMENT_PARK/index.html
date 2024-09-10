@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amusement Park </title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+  <h1>
+    Parque de atracciones
+  </h1>
+  <h2>
+    DAW_M06_UF1
+  </h2>
+
+
+
+  <nav>
+    <a href="usuario.html">usuario.html</a>
+    <a href="atracciones.html">atraciones.html</a>
+  </nav>
+
+  <p>
+
+    Nos piden desarrollar una parte de una web de un parque de atracciones. En la página a
+    desarrollar el usuario que la visita puede averiguar si las características, de edad y altura,
+    introducidas son suficientes para poder acceder a dos de las atracciones, teniendo en
+    cuenta los siguientes aspectos y condiciones:
+
+  </p>
+
+
+  <ol>
+    <li>
+
+      En un fichero HTML, que llamaremos <a href="usuario.html">usuario.html,</a> se tiene que crear un script, dentro
+      del código HTML, para guardar el nombre del usuario.
+      <strong>El usuario debe introducir su nombre de pila mediante un cuadro de diálogo que se
+        convertirá, independientemente de cómo se haya escrito, en mayúsculas. </strong>
+
+      <hr>
+      <details>
+        let nombreUsuario = prompt("Introduce tu nombre de pila:");
+        <summary>¿Como se hace un cuadro de dialogo (prompt)?</summary>
+      </details>
+
+      <details>
+        nombreUsuario = nombreUsuario.toUpperCase();
+        <summary>¿Como se convierte a mayusculas?</summary>
+      </details>
+
+      <br><br>
+
+      Además, <strong>el nombre de dicho usuario debe ser introducido de manera que pueda ser utilizado en el
+        resto de páginas de la web durante la sesión abierta</strong>, nunca en sesiones posteriores.
+
+      <hr>
+      <details>
+        sessionStorage.setItem("nombreUsuario", nombreUsuario);
+        <summary>¿Como se persiste una variable durante la session RAM?</summary>
+      </details>
+
+      <br><br>
+
+      En el fichero usuario.html <strong> debe aparecer un saludo de bienvenida que incluya el
+        nombre</strong> del usuario. Finalmente, esta página debe contener un enlace HTML que lleve al fichero
+      <a href="atracciones.html">atracciones.html.</a>
+
+      <hr>
+      <details>
+        document.getElementById("saludo").textContent = "¡Bienvenido, " + nombreUsuario + "!";
+        <summary>¿Como incluyo el nombre en el texto de bienvenida?</summary>
+      </details>
+
+      <br><br>
+    </li>
+
+
+    <li>
+
+      En el fichero <a href="atracciones.html">atracciones.html</a>
+      <strong> se deben introducir dos variables mediante cuadros de
+        diálogo que pidan la edad y la altura del usuario</strong>, a partir de estos datos debe aparecer
+      en la web dos mensajes, para cada una de las atracciones, que digan si el usuario puede
+      acceder a las atracciones:
+
+      <ul>
+        <li>En la atracción 1, el usuario debe ser mayor de edad y tener una altura mínima de 1,4m.</li>
+        <li>En la atracción 2, el usuario debe ser mayor de edad o tener una altura mínima de 1,5m.</li>
+      </ul>
+
+      En el fichero <strong>debe aparecer los dos mensajes con el nombre del usuario, el nombre de
+        la atracción, si puede acceder o no y el motivo</strong>. Por ejemplo:
+      Si EVA tiene 16 años y mide 1,62m, los mensajes podrían ser:
+      EVA no puede acceder a la atracción 1 porque tiene 16 años y es menor de edad.
+      EVA puede acceder a la atracción 2 porque mide 1,62m.
+
+      <hr>
+      <details>
+        let nombreUsuario = sessionStorage.getItem("nombreUsuario");
+        <br>
+        <summary>¿Como recupero el nombre de usuario introducidos previamente en usuarios.html?</summary>
+      </details>
+
+      <details>
+        Normalmente es preferible evitar la recusividad en JS pero como se le mejor,
+        no hay riesgo de saturar la memoria por inputs manuales y tampoco evitaria el problema de accesivilidad
+        (al recargar la pagina con los cuadros de dialogo abiertos) he decidido hacerlo así.
+        <br>
+        <code>
+          // Solicitamos un dato (ej: la edad) con un mensaje que diga "Introduce tu edad..." <br>
+          function solicitarDato(mensaje, min, max) {<br>
+            <br>
+            input = prompt(mensaje)<br>
+            <br>
+            // Si el valor no es un numero volvemos a pedir la información recursivamente<br>
+            if (isNaN(input) || input < min || input > max) return solicitarDato(mensaje, min, max)<br>
+            else return input<br>
+          }<br>
+
+          
+        </code>
+        <br>
+        Tambien se me ocurrio hacerlo así: <br>
+        <code>
+          function solicitarDato(mensaje, min, max) {<br>
+            <br>
+            let input;<br>
+            let errorMessage = `Por favor, introduce un valor entre ${min} y ${max}.`;<br>
+            <br>
+            // Bucle que pide el dato hasta que el usuario ingrese un valor válido <br>
+            while (true) {<br>
+                input = prompt(mensaje);<br>
+                <br>
+                // Si el valor no es un número o no está dentro de los límites, mostramos el mensaje de error <br>
+                if (isNaN(input)) {<br>
+                    alert("El valor introducido no es un número. Inténtalo de nuevo.");<br>
+                } else if (input < min || input > max) {<br>
+                    alert(errorMessage);<br>
+                } else {<br>
+                    // Si el valor es válido, salimos del bucle<br>
+                    return input;<br>
+                }<br>
+            }<br>
+        }<br>
+        </code>
+        <br>
+        <summary>¿Como evito que el usuario pueda pasar un valor NaN (Not a Number)?</summary>
+      </details>
+    </li>
+  </ol>
+
+
+</body>
+
+</html>

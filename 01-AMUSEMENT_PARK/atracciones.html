@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Verificación de Acceso a las atracciones</title>
+  <script>
+
+    // Verificamos la existencia del nombre antes de cargar el body
+    let nombreUsuario = sessionStorage.getItem("nombreUsuario");
+
+    if (nombreUsuario === null) {
+
+      alert("Por favor, visita la página de usuario.html para introducir tu nombre antes.");
+
+      // Si no existe nombreUsuario en la session redirigimos a la página de inicio
+      window.location.href = "index.html";
+    }
+
+  </script>
+</head>
+
+
+<body>
+
+  <h1>Acceso a las Atracciones</h1>
+  <p id="datosUsuario"></p>
+  <p id="resultadoAtraccion1"></p>
+  <p id="resultadoAtraccion2"></p>
+
+
+  <script>
+
+    
+    const mayordeEdad = 18; // podria variar segun el pais
+
+    const edadMinimaMundial = 0; 
+    const edadMaximaMundial = 117; // la persona mas mayor del mundo
+
+    const alturaMinimaMundial = 62; // la persona mas baja del mundo
+    const alturaMaximaMundial = 251; // la persona mas alta del mundo
+
+    // Esta data podria venir de una API por ejemplo
+    // pd: basededatos no normalizada
+    const data = {
+      atraccion1: {
+        nombre: "Atracción 1",
+        edadMinima: mayordeEdad,
+        alturaMinima: 140
+      },
+      atraccion2: {
+        nombre: "Atracción 2",
+        edadMinima: mayordeEdad,
+        alturaMinima: 150
+      }
+    }
+
+
+
+    // Solicitamos un dato (ej: la edad) con un mensaje que diga "Introduce tu edad..."
+    function solicitarDato(mensaje, min, max) {
+
+      input = prompt(mensaje)
+
+      // Si el valor no es un numero volvemos a pedir la información recursivamente
+      if (isNaN(input) || input < min || input > max) return solicitarDato(mensaje, min, max)
+      else return input
+    }
+
+
+
+
+    // Función para comprobar si el usuario cumple los requisitos de las atracciones
+    function verificarAcceso(atraccion, edad, altura) {
+
+      if (edad < atraccion.edadMinima) {
+        return nombreUsuario + " no puede acceder a la " + atraccion.nombre + " porque tiene " + edad + " años y es menor de edad.";
+      }
+
+      if (altura < atraccion.alturaMinima) {
+        return nombreUsuario + " no puede acceder a la " + atraccion.nombre + " porque mide " + altura + "cm y no cumple la altura mínima.";
+      }
+
+      return nombreUsuario + " puede acceder a la " + atraccion.nombre + " porque cumple con la edad mínima de " + atraccion.edadMinima + " años y la altura mínima de " + atraccion.alturaMinima + "cm.";
+
+    }
+
+
+
+
+    // Se ejecuta cuando la página se cargue
+    window.onload = function () {
+
+      // Solicitamos los datos
+      let mensajeEdad = "Introduce tu edad (entre " + edadMinimaMundial + " años y " + edadMaximaMundial + " años):"
+      let edad = solicitarDato(mensajeEdad, edadMinimaMundial, edadMaximaMundial);
+
+      let mensajeAltura = "Introduce tu altura en centrimetros (entre " + alturaMinimaMundial + "cm y " + alturaMaximaMundial + "cm):"
+      let altura = solicitarDato(mensajeAltura, alturaMinimaMundial, alturaMaximaMundial);
+
+      // Mostramos los mensajes en el HTML
+      document.getElementById("datosUsuario").textContent = "Edad: " + edad + "años  -  Altura: " + altura + "cm";
+      document.getElementById("resultadoAtraccion1").textContent = verificarAcceso(data.atraccion1, edad, altura);
+      document.getElementById("resultadoAtraccion2").textContent = verificarAcceso(data.atraccion2, edad, altura);
+
+    }
+
+  </script>
+</body>
+
+</html>

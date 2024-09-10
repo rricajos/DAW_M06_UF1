@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Bienvenido al Parque de Atracciones</title>
+    <script>
+        // Función para pedir el nombre del usuario y almacenarlo en sessionStorage
+        function solicitarNombreUsuario() {
+            let nombreUsuario = prompt("Introduce tu nombre de pila:");
+
+            if (nombreUsuario) {
+                // Convertir el nombre a mayúsculas
+                nombreUsuario = nombreUsuario.toUpperCase();
+
+                // Guardar el nombre en sessionStorage
+                sessionStorage.setItem("nombreUsuario", nombreUsuario);
+
+                // Mostrar el saludo de bienvenida
+                document.getElementById("saludo").textContent = "¡Bienvenido, " + nombreUsuario + "!";
+            }
+        }
+
+        // Ejecutar cuando la página se cargue
+        window.onload = function() {
+            let nombreGuardado = sessionStorage.getItem("nombreUsuario");
+
+            if (nombreGuardado) {
+                // Si ya hay un nombre almacenado, mostrar el saludo
+                document.getElementById("saludo").textContent = "¡Bienvenido de nuevo, " + nombreGuardado + "!";
+            } else {
+                // Si no hay nombre almacenado, solicitarlo
+                solicitarNombreUsuario();
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1 id="saludo">¡Bienvenido!</h1>
+    
+    <!-- Enlace a la página de atracciones -->
+    <div>
+      <a href="atracciones.html">Ir a la página de atracciones</a>
+    </div>
+    
+</body>
+</html>
