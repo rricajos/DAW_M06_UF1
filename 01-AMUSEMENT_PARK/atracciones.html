@@ -33,10 +33,10 @@
 
   <script>
 
-    
+
     const mayordeEdad = 18; // podria variar segun el pais
 
-    const edadMinimaMundial = 0; 
+    const edadMinimaMundial = 0;
     const edadMaximaMundial = 117; // la persona mas mayor del mundo
 
     const alturaMinimaMundial = 62; // la persona mas baja del mundo
@@ -76,11 +76,11 @@
     function verificarAcceso(atraccion, edad, altura) {
 
       if (edad < atraccion.edadMinima) {
-        return nombreUsuario + " no puede acceder a la " + atraccion.nombre + " porque tiene " + edad + " años y es menor de edad.";
+        return nombreUsuario + " no puede acceder a la " + atraccion.nombre + " porque tiene " + edad + " años y la edad mínima es de " + atraccion.edadMinima + "años.";
       }
 
       if (altura < atraccion.alturaMinima) {
-        return nombreUsuario + " no puede acceder a la " + atraccion.nombre + " porque mide " + altura + "cm y no cumple la altura mínima.";
+        return nombreUsuario + " no puede acceder a la " + atraccion.nombre + " porque mide " + altura + "cm y no cumple la altura mínima de " + atraccion.alturaMinima + "cm.";
       }
 
       return nombreUsuario + " puede acceder a la " + atraccion.nombre + " porque cumple con la edad mínima de " + atraccion.edadMinima + " años y la altura mínima de " + atraccion.alturaMinima + "cm.";
