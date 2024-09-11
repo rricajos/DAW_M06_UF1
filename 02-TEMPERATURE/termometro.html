@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Comprobar Temperatura</title>
+
+</head>
+<body>
+    <h1>Comprobar Temperatura</h1>
+
+    <form id="tempForm">
+        <label for="temperatura">Introduce una temperatura entre -30 y 60:</label>
+        <br>
+        <input type="number" id="temperatura" name="temperatura" required>
+        <br>
+        <button type="submit">Comprobar Temperatura</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById("tempForm").addEventListener("submit", function(event) {
+            event.preventDefault();  // Evitar el envío del formulario
+
+            let temperatura = parseFloat(document.getElementById("temperatura").value);
+            let mensaje = "";
+
+            if (temperatura >= -30 && temperatura <= 60) {
+                if (temperatura >= -30 && temperatura <= -1) {
+                    mensaje = temperatura + "º es una temperatura Muy Baja.";
+                } else if (temperatura >= 0 && temperatura <= 12) {
+                    mensaje = temperatura + "º es una temperatura Baja.";
+                } else if (temperatura >= 13 && temperatura <= 25) {
+                    mensaje = temperatura + "º es una temperatura Templada.";
+                } else if (temperatura >= 26 && temperatura <= 40) {
+                    mensaje = temperatura + "º es una temperatura Alta.";
+                } else if (temperatura >= 41 && temperatura <= 60) {
+                    mensaje = temperatura + "º es una temperatura Muy Alta.";
+                }
+            } else {
+                mensaje = "La cifra no es correcta.";
+            }
+
+            document.getElementById("resultado").textContent = mensaje;
+        });
+    </script>
+</body>
+</html>
