@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Ricard Penin Honrubia">
+
+  <link rel="stylesheet" href="style.css">
+  <title>Lista de números decrecientes</title>
+</head>
+
+<body>
+  <h1>Ejercico - Lista de números decrecientes</h1>
+  <p>
+    En un fichero HTML se quiere generar una lista decreciente de todos los números
+    positivos impares inferiores al número introducido.
+  </p>
+  <p>
+    Los números deben aparecer en un cuadro de alerta en líneas diferentes.
+  </p>
+  <script id="ejercicio.js">
+
+    // Lista de números decrecientes
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // Pedimos un número al usuario
+      let input = prompt("Introduce un número porsitivo");
+
+      // Si introduce un caracter no númerico se lo pedimos de nuevo 
+      while (isNaN(input) || input < 0 || input === "") 
+        input = prompt("Introduce un número porsitivo");
+   
+      // Declaramos la lista decreciente
+      let output = "Lista de impares decreciente: ";
+
+      // Hacemos un bucle for decreciente del número introducido
+      for (let i = input; i > 0; i--) {
+
+        // Construimos la lista solo con los numeros impares 
+        if (i % 2 !== 0) output += "\n" + i;
+
+      }
+
+      // Ejecutamos la salida demandada
+      alert(output)
+
+    });
+  </script>
+  <script>
+
+      // Muestra el codigo del ejercico en el html
+      document.addEventListener("DOMContentLoaded", () => {
+
+        // Seleccionamos el script actual
+        const currentScript = document.getElementById("ejercicio.js");
+
+        // Creamos un elemento <pre> contenedor de código
+        const codeContainer = document.createElement("pre");
+
+        // Damos estilo
+        codeContainer.style.whiteSpace = "pre-wrap"; 
+        codeContainer.style.border = "1px solid #ccc"; 
+        codeContainer.style.padding = "1rem"; 
+        codeContainer.style.backgroundColor = "#f9f9f9"; 
+
+        // Obtenemos el contenido del script actual
+        codeContainer.textContent = currentScript.innerHTML;
+
+        // Insertamos el contenedor en el body
+        document.body.appendChild(codeContainer);
+    });
+  </script>
+</body>
+
+</html>
