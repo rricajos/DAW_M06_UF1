@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repeat Char</title>
+</head>
+
+<body>
+  <script>
+
+    let inputChar = prompt("Introduce una letra:")
+
+    while (!isNaN(inputChar) || inputChar == "") inputChar = prompt("Introduce una letra:");
+
+    inputChar = inputChar.slice(0, 1);
+
+    let inputNumber = prompt("Introduce una número:")
+
+    while (isNaN(inputNumber) || inputNumber === "" || inputNumber < 0) {
+      inputNumber = prompt("Introduce un número:");
+
+    }
+
+    console.log(inputChar.repeat(inputNumber))
+  </script>
+</body>
+
+</html>
