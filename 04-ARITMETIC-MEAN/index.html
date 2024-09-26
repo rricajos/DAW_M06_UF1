@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Ricard Penin Honrubia">
+  <link rel="stylesheet" href="style.css">
+  <title>Media Aritmetica</title>
+</head>
+
+<body>
+  <h1>Ejercicio- Media Aritmetica</h1>
+  <p>
+    En un fichero HTML se quiere poder introducir tres números para realizar la media
+    aritmética. Utiliza cuadros de diálogos para introducir los tres números y una
+    estructura de bucle.
+  </p>
+  <p>
+    El resultado de la media aritmética debe aparecer en el cuerpo del documento
+    HTML.
+  </p>
+  <div>
+    <h2>Operacion aritmetica: </h2>
+    <ul id="user-numbers">
+  
+    </ul>
+    <p>La media aritmetica de <span id="spanArray"></span> es de: <span id="resultado"></span></p>
+  </div>
+  
+
+  <script>
+    // Función que calcula la media de los números pasados como argumentos
+    function media(...args) {
+
+
+      // hacemos la media aritmetica dividiendo la suma por la longitud del array
+      return sum / args.length;
+    }
+
+    // length: Cantidad de numeros que el usuario debe introducir en el array
+    const length = 3;
+    let array = [];
+    const ul = document.getElementById("user-numbers");
+
+    // Solicitamos la cangtidad de números: 3 (delcarado en const length)
+    for (let i = 0; i < length; i++) {
+      let input = prompt("Introduzca un número");
+
+      // Verificamos si el input es válido
+      while (isNaN(input) || input === "") {
+        input = prompt("Introduzca un número");
+      }
+
+      // Guardamos el numeror introducido
+      array.push(Number(input));
+
+      const li = document.createElement("li");
+      li.className = "user-number"
+      li.innerText = input;
+      ul.appendChild(li);
+    }
+
+
+    // reduce devolvera la suma de todos los argumentos
+    const sum = array.reduce(
+
+      // acumula la suma de currentNumber en accumulator 
+      (accumulator, currentNumber) => accumulator + currentNumber,
+      0
+    );
+
+  
+    const li = document.createElement("li");
+    li.className = "user-numbers-sum"
+    li.innerText = sum + " / " + length + " números introducidos = " + sum/length;
+    ul.appendChild(li);
+
+    const spanArray = document.getElementById("spanArray");
+    spanArray.innerText = array;
+
+    const span = document.getElementById("resultado");
+    span.innerText = sum/length;
+
+  </script>
+
+
+</body>
+
+</html>
